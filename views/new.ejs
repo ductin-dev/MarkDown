@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('_stylesheet')%>
+    <title>New Blog | SatBlog</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Bài viết mới</h1>
+        
+        <form method="POST" action="/article/upload">
+            <div class="form-group">
+              <label for="">Tiêu đề</label>
+              <input type="text" class="form-control" name="postTitle" aria-describedby="helpId" placeholder="Nhập tiêu đề bài viết" required>
+              <label for="">Tóm tắt</label>
+              <textarea type="text" class="form-control" name="postDes" aria-describedby="helpId" placeholder="Tóm tắt sơ về bài viết"></textarea>
+              <label for="">Nội dung</label>
+              <textarea style="height: 350px;" type="text" class="form-control" name="postContent" aria-describedby="helpId" placeholder="Viết điều gì đó, có thể viết bằng markdown" required>  </textarea>
+              <br>
+              <button type="submit" class="btn btn-primary">Đăng và chờ duyệt</button>
+              <a href="/" type="submit" class="btn btn-secondary">Hủy bỏ</a>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

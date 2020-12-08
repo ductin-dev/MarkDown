@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('_stylesheet')%>
+    <title>Home | SatBlog</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-weight: 600;">Satellite Blog</h1>
+        <a href="/article/new" class="btn btn-success">Viết bài mới</a>
+    
+        <%content.forEach(element => { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="card">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                            <a class="nav-link active" href="#">Bài viết</a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Ngày tạo: <%=element.date%></a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <h4 class="card-title"><%=element.title%></h4>
+                        <p class="card-text"><%=element.des%></p>
+                        <a class="btn btn-primary" href="/article/view/<%=element.id%>">Xem thêm</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        <%});%>
+    </div>
+    
+</body>
+</html>

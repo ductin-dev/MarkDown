@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('_stylesheet')%>
+    <title>ViewBlog | SatBlog</title>
+</head>
+<body>
+    <div class="container">
+      <div class="card" style="height: fit-content;">
+        <div class="card-body">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><%=blog.title%><span style="font-size:22px;color:rgb(0, 151, 252);font-weight: 600;float:right;"><i>Public vào ngày&nbsp;<%=blog.date%></i></span></h4>
+                <h6 class="card-title"><%=blog.des%></h6>
+                <hr>
+                <div id="mycontent" class="card-text">
+                
+                </div>
+                <div id="mycontent2" style="display:none">
+                  <%=blog.content%>
+                </div>
+                <script>
+                  document.getElementById('mycontent').innerHTML= document.getElementById('mycontent2').innerText
+                </script>
+                <a class="btn btn-primary" href="/">Về trang chủ</a>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>
