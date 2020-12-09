@@ -17,6 +17,10 @@ const schema=new mongoose.Schema({
         type:String,
         default:"Vô danh"
     },
+    isAnonymous:{
+        type:Number,
+        default:0
+    },
     isPublic:{
         type:Boolean,
         default:false

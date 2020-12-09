@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%-include('_stylesheet')%>
+    <%-include('resource/_stylesheet')%>
     <title>Home | SatBlog</title>
 </head>
 <body>
@@ -38,6 +38,8 @@
                         <h4 class="card-title"><%=element.title%></h4>
                         <p class="card-text"><%=element.des%></p>
                         <a class="btn btn-primary" href="/article/view/<%=element.id%>">Xem thêm</a>
+                        <a class="btn btn-warning" href="/article/edit/<%=element.id%>">Sửa bài viết</a>
+                        <a class="btn btn-danger" href="/article/doDelete/<%=element.id%>">Xóa bài viết</a>
                       </div>
                     </div>
                 </div>
