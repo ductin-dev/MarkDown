@@ -8,8 +8,10 @@
 </head>
 <body>
   <div class="container" style="align-items: center;">
-    <h1 class="mb-4">Đăng nhập</h1>
-    
+    <h1 class="mb-4">Đăng nhập</h1>  
+    <% if(locals.usernameErr) { %>
+      <p style=" color: red" ><%= usernameErr %></p>
+    <% } %>
     <form method="POST" action="/login/userlogin">
         <div class="form-group col-md-4 ">
           <label for="">Tên người dùng</label>
@@ -22,6 +24,5 @@
         </div>
     </form>
 </div>
-    
 </body>
 </html>

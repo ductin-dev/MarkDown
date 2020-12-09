@@ -1,6 +1,7 @@
 //Sever
 const express=require('express')
 const mongoose=require('mongoose')
+const session = require('express-session');
 //Controller
 const articleModule = require('./controller/articles')
 const loginModule=require('./controller/login')
@@ -9,6 +10,18 @@ const Blog=require('./model/blog')
 
 //Init
 const app=express()
+
+app.use(session({
+    secret:'HACK_CON_ME_MAY',
+    saveUninitialized: false,
+    resave: true
+}));
+
+app.use(function(req, res, next) {
+    res.locals.user = req.session.username;
+    next();
+  });
+
 mongoose.connect('mongodb+srv://satellite1012:satellite1012@cluster0.hdqsf.mongodb.net/Test?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useUnifiedTopology: true
