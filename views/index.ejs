@@ -10,8 +10,15 @@
     <div class="container">
         <h1 style="font-weight: 600;">Satellite Blog</h1>
         <a href="/article/new" class="btn btn-success">Viết bài mới</a>
-        <a href="/login/" class="btn btn-warning">Đăng nhập</a>
-    
+        <% if(locals.user) { %>
+            <form style="display: inline" action="login/logout" method="post" name="logoutForm">
+              <a style="float:right; background-color: #6e0404; color: white; margin-left: 5px" 
+                class="btn btn-warning" onclick="logout()">Đăng xuất</a>
+            </form>
+          <p style="float:right; background-color: #26005e; color: white" class="btn btn-warning""><%= user %></p>
+        <% } else {%>
+          <a style="float:right" href="/login/" class="btn btn-warning">Đăng nhập</a>
+        <% } %>
         <%content.forEach(element => { %>
             <div class="card mt-4">
                 <div class="card-body">
@@ -38,5 +45,21 @@
         <%});%>
     </div>
     
+    <script>
+      function logout(){
+        Swal.fire({
+          icon: 'info',
+          title: 'Bạn có chắc muốn đăng xuất?',
+          showDenyButton: true,
+          confirmButtonText: 'Đăng xuất',
+          denyButtonText: 'Hủy'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.logoutForm.submit();
+          }
+        })
+      }
+    </script>
+  
 </body>
 </html>
