@@ -13,6 +13,10 @@ const schema=new mongoose.Schema({
         type:String,
         required:true
     },
+    author:{
+        type:String,
+        default:"Vô danh"
+    },
     isPublic:{
         type:Boolean,
         default:false

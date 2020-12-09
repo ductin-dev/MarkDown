@@ -1,6 +1,9 @@
+//Init
 const express=require('express')
-const Blog=require('./../model/blog')
 const router=express.Router()
+
+//Used Model
+const Blog=require('./../model/blog')
 
 router.get('/new',(req,res)=>{
     res.render('new')
@@ -20,7 +23,8 @@ router.post('/upload',async (req,res)=>{
     const blog=new Blog({
         title:req.body.postTitle,
         des:req.body.postDes,
-        content:req.body.postContent
+        content:req.body.postContent,
+        author:req.body.postAuthor
     })
     try{
         await blog.save()
@@ -31,4 +35,5 @@ router.post('/upload',async (req,res)=>{
     }
 })
 
+//Export module
 module.exports=router
