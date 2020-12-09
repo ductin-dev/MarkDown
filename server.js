@@ -1,38 +1,46 @@
-//Sever
+//Library
 const express=require('express')
 const mongoose=require('mongoose')
 const session = require('express-session');
+
 //Controller
 const articleModule = require('./controller/articles')
 const loginModule=require('./controller/login')
+
 //Model
 const Blog=require('./model/blog')
 
 //Init
 const app=express()
+{
+    //Init session
+    app.use(session({
+        secret:'HACK_CON_ME_MAY',
+        saveUninitialized: false,
+        resave: true
+    }));
+    app.use(function(req, res, next) {
+        res.locals.user = req.session.username;
+        next();
+    });
 
-app.use(session({
-    secret:'HACK_CON_ME_MAY',
-    saveUninitialized: false,
-    resave: true
-}));
+    //Init database connection
+    mongoose.connect('mongodb+srv://satellite1012:satellite1012@cluster0.hdqsf.mongodb.net/Test?retryWrites=true&w=majority',{
+        useNewUrlParser:true,
+        useUnifiedTopology: true
+    })
 
-app.use(function(req, res, next) {
-    res.locals.user = req.session.username;
-    next();
-  });
+    //Init view engine
+    app.set('view engine','ejs')
 
-mongoose.connect('mongodb+srv://satellite1012:satellite1012@cluster0.hdqsf.mongodb.net/Test?retryWrites=true&w=majority',{
-    useNewUrlParser:true,
-    useUnifiedTopology: true
-})
-app.set('view engine','ejs')
-app.use(express.urlencoded({extended:false}))
+    //Init max payload limit
+    var bodyParser = require('body-parser');
+    app.use(bodyParser.json({limit: "50mb"}));
+    app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
-//Payload Limit
-var bodyParser = require('body-parser');
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+    //Other
+    app.use(express.urlencoded({extended:false}))
+}
 
 //Main
 app.get('/',async (req,res)=>{
@@ -40,7 +48,7 @@ app.get('/',async (req,res)=>{
     res.render('index',{content:blogs})
 })
 
-//Module
+//Init controller to this sever, must put mostly below all statement
 app.use('/article',articleModule)
 app.use('/login',loginModule)
 
