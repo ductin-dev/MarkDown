@@ -2,11 +2,9 @@
 const express=require('express')
 const mongoose=require('mongoose')
 const session = require('express-session');
-
 //Controller
 const articleModule = require('./controller/articles')
 const loginModule=require('./controller/login')
-
 //Model
 const Blog=require('./model/blog')
 
@@ -33,6 +31,9 @@ const app=express()
     //Init view engine
     app.set('view engine','ejs')
 
+    //must define the public folder to store static files(css,js,img...)
+    app.use(express.static(__dirname + '/public'));
+
     //Init max payload limit
     var bodyParser = require('body-parser');
     app.use(bodyParser.json({limit: "50mb"}));
@@ -44,7 +45,7 @@ const app=express()
 
 //Main
 app.get('/',async (req,res)=>{
-    const blogs=await Blog.find().sort({date:'desc'})
+    const blogs=await Blog.find().sort({_id:'desc'})
     res.render('index',{content:blogs})
 })
 
