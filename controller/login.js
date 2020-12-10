@@ -25,7 +25,7 @@ const login = async function login(req,res){
     if(user){
         if(user.password==password){
             if(user.role==0){
-                req.session.username = 'admin';
+                req.session.username = user.username;
             } else {
                 req.session.username = user.username;
             }

@@ -47,6 +47,45 @@
         <%});%>
     </div>
     
+    <!-- handle err permission-->
+      
+    <% if(locals.authErr) { %>
+      <script>
+          Swal.fire({
+            icon: 'info',
+            title: 'Vui lòng đăng nhập',
+            showDenyButton: true,
+            confirmButtonText: 'Đăng Nhập',
+            denyButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "http://localhost:3000/login/";
+            }else{
+              window.location.href = "http://localhost:3000/";
+            }
+          })
+      </script>
+    <% } %>
+    
+    <% if(locals.notPermiss) { %>
+      <script>
+          Swal.fire({
+            icon: 'info',
+            title: 'Bạn không có quyền thực hiện chức năng',
+            showDenyButton: true,
+            confirmButtonText: 'Ok',
+            denyButtonText: 'Hủy'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "http://localhost:3000/";
+            }else{
+              window.location.href = "http://localhost:3000/";
+            }
+          })
+      </script>
+    <% } %>
+    <!--end handle err permission-->
+    
     <script>
       function logout(){
         Swal.fire({

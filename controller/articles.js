@@ -2,7 +2,7 @@
 const { localsName } = require('ejs')
 const express=require('express')
 const router=express.Router()
-
+const {isAdmin, isUser} = require('./../middleware/auth')
 //Used Model
 const Blog=require('./../model/blog')
 
@@ -15,10 +15,15 @@ router.get('/view/:id',async (req,res)=>{
     const blog=await Blog.findById(req.params.id)
     res.render("blog/view",{blog})
 })
+
+// Authorize
+router.use(isAdmin)
+
 router.get('/doDelete/:id',async (req,res)=>{
     await Blog.findByIdAndDelete(req.params.id)
     res.redirect("/");
 })
+
 router.post('/doEdit/:id',async (req,res)=>{
     try{
         await Blog.findByIdAndUpdate(req.params.id,{
